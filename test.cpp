@@ -50,8 +50,8 @@ TEST_CASE("Testing Parse methods")
 
 TEST_CASE("Testing Parse implementation")
 {
-    ShuntingYard sy(std::string("4+3"));
-    std::queue<std::string> out1 = sy.run();
+    ShuntingYard sy1(std::string("4+3"));
+    std::queue<std::string> out1 = sy1.parsing();
     std::queue<std::string> out2;
     out2.push("4");
     out2.push("3");
@@ -63,6 +63,26 @@ TEST_CASE("Testing Parse implementation")
         REQUIRE (out1.front() ==  out2.front() );
         out1.pop();
         out2.pop();
+    }
+
+    ShuntingYard sy2(std::string("3 + 4 * 2 / (1 - 5)"));
+    std::queue<std::string> out3 = sy2.parsing();
+    std::queue<std::string> out4;
+    out4.push("3");
+    out4.push("4");
+    out4.push("2");
+    out4.push("*");
+    out4.push("1");
+    out4.push("5");
+    out4.push("-");
+    out4.push("/");
+    out4.push("+");
+
+    for (int i = 0; i < out1.size(); i++)
+    {
+        REQUIRE (out3.front() ==  out4.front() );
+        out3.pop();
+        out4.pop();
     }
 
 }

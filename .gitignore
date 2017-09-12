@@ -1,0 +1,4 @@
+*.un~
+*.o
+test
+arithmetic

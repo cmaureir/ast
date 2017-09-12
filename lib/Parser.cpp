@@ -1,13 +1,8 @@
 #include "Parser.hpp"
 
-Parser::Parser()
-{
-
-}
-
-Parser::~Parser()
-{
-}
+// Empty constructor and destructor
+Parser::Parser() {}
+Parser::~Parser() {}
 
 bool Parser::check_number(std::string s)
 {
@@ -62,6 +57,7 @@ bool Parser::check_right_bracket(std::string s)
     return false;
 }
 
+// Check if `a` precedes `b`
 bool Parser::check_precedence(std::string a, std::string b)
 {
     if (a == "/" || a == "*")

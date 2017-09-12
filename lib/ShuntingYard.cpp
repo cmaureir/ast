@@ -10,64 +10,66 @@ ShuntingYard::~ShuntingYard()
 
 }
 
-std::queue<std::string> ShuntingYard::run()
+std::queue<std::string> ShuntingYard::parsing()
 {
-
     std::istringstream input(line);
 
     while (input >> cc)
     {
         std::string c(1, cc);
 
+        // Checking if the current element is a number
         if (p.check_number(c))
         {
-            std::cout << "Pushing " << c  << " to the output queue" << std::endl;
             output.push(c);
         }
 
+        // Checking operators
         else if (p.check_operator(c))
         {
+            // Verifying precedence
             while (!p.operators.empty() && p.check_precedence(p.operators.top(), c))
             {
-                std::cout << "Pushing " << p.operators.top()  << " to the operator stack" << std::endl;
                 output.push(p.operators.top());
                 p.operators.pop();
             }
-            std::cout << "Pushing " << c  << " to the operator stack" << std::endl;
             p.operators.push(c);
         }
 
+        // Checking left-bracket
         else if (p.check_left_bracket(c))
         {
-            std::cout << "Pushing " << c  << " to the operator stack" << std::endl;
             p.operators.push(c);
         }
 
+        // Checking right-bracket
         else if (p.check_right_bracket(c))
         {
-            std::cout << "is a right bracket" << std::endl;
             while (!p.operators.empty() && !p.check_left_bracket(p.operators.top()))
             {
-                std::cout << "Pushing " << p.operators.top()  << " to the output queue" << std::endl;
                 output.push(p.operators.top());
                 p.operators.pop();
             }
+
+            // Verify missing left brackets
             if (!p.check_left_bracket(p.operators.top()))
             {
                 throw std::invalid_argument("Mismatched parentheses: No left bracket");
-
             }
+
             p.operators.pop();
         }
     }
 
     while (!p.operators.empty())
     {
+        // Remaining elements cannot be parentheses
         std::string t = p.operators.top();
         if (p.check_left_bracket(t) || p.check_right_bracket(t))
         {
             throw std::invalid_argument("Mismatched parentheses: Extra bracket");
         }
+
         output.push(p.operators.top());
         p.operators.pop();
     }

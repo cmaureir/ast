@@ -14,12 +14,12 @@ class Parser
         Parser();
         ~Parser();
 
-        std::queue<float> numbers;
+        // Stack for operators
         std::stack<std::string> operators;
 
-        std::vector<std::string> valid_operators = {"+", "-", "/", "*"};
-        std::vector<std::string> left_brackets = {"{", "(", "["};
-        std::vector<std::string> right_brackets = {"}", ")", "]"};
+        const std::vector<std::string> valid_operators = {"+", "-", "/", "*"};
+        const std::vector<std::string> left_brackets = {"{", "(", "["};
+        const std::vector<std::string> right_brackets = {"}", ")", "]"};
 
         bool check_number(std::string s);
         bool check_operator(std::string s);

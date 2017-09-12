@@ -14,7 +14,7 @@ class ShuntingYard
         Parser p;
         std::queue<std::string> output;
 
-        std::queue<std::string> run();
+        std::queue<std::string> parsing();
         void print_result();
 };
 #endif
