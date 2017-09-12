@@ -1,7 +1,9 @@
+#ifndef PARSER_HPP
+#define PARSER_HPP
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <queue>
-#include <vector>
 #include <iterator>
 #include <algorithm>
 #include <stack>
@@ -25,3 +27,5 @@ class Parser
         bool check_right_bracket(std::string s);
         bool check_precedence(std::string a, std::string b);
 };
+
+#endif
