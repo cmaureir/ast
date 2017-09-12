@@ -12,9 +12,9 @@ class ShuntingYard
         std::string s;
         std::string line;
         Parser p;
-        std::queue<std::string> output;
+        std::stack<std::string> output;
 
-        std::queue<std::string> parsing();
+        std::stack<std::string> parsing();
         void print_result();
 };
 #endif

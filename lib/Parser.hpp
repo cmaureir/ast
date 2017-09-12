@@ -22,9 +22,7 @@ class Parser
         const std::vector<std::string> right_brackets = {"}", ")", "]"};
 
         bool check_number(std::string s);
-        bool check_operator(std::string s);
-        bool check_left_bracket(std::string s);
-        bool check_right_bracket(std::string s);
+        bool check_if_in(std::string s, const std::vector<std::string> v);
         bool check_precedence(std::string a, std::string b);
 };
 

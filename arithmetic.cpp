@@ -1,5 +1,6 @@
 #include "lib/Parser.hpp"
 #include "lib/ShuntingYard.hpp"
+#include "lib/PostfixEvaluation.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -7,7 +8,7 @@ int main(int argc, char *argv[])
     std::string line;
 
     // Output for the ShuntingYard algorithm
-    std::queue<std::string> output;
+    std::stack<std::string> output;
 
     // Reading line and initialising ShuntingYard
     getline(std::cin, line);
@@ -25,6 +26,9 @@ int main(int argc, char *argv[])
 
     // Print output from ShuntingYard
     sy.print_result();
+
+    PostfixEvaluation pe(output);
+    std::cout << pe.calculate() <<std::endl;
 
     return 0;
 }

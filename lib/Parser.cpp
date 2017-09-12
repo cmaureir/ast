@@ -18,42 +18,13 @@ bool Parser::check_number(std::string s)
     return true;
 }
 
-bool Parser::check_operator(std::string s)
+bool Parser::check_if_in(std::string s, const std::vector<std::string> v)
 {
-
-    auto r = std::find(std::begin(valid_operators), std::end(valid_operators), s);
-
-    if (r != std::end(valid_operators))
+    auto r = std::find(std::begin(v), std::end(v), s);
+    if (r != std::end(v))
     {
         return true;
     }
-
-    return false;
-}
-
-bool Parser::check_left_bracket(std::string s)
-{
-
-    auto r = std::find(std::begin(left_brackets), std::end(left_brackets), s);
-
-    if (r != std::end(left_brackets))
-    {
-        return true;
-    }
-
-    return false;
-}
-
-bool Parser::check_right_bracket(std::string s)
-{
-
-    auto r = std::find(std::begin(right_brackets), std::end(right_brackets), s);
-
-    if (r != std::end(right_brackets))
-    {
-        return true;
-    }
-
     return false;
 }
 
