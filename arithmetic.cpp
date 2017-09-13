@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
 
     // Output for the ShuntingYard algorithm
     std::stack<std::string> output;
-
     // Reading line and initialising ShuntingYard
     getline(std::cin, line);
     ShuntingYard sy(line);
@@ -20,7 +19,7 @@ int main(int argc, char *argv[])
     }
     catch (const std::invalid_argument &e)
     {
-        //std::cerr << "Error: " << e.explain << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
         return 0;
     }
 
