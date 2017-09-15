@@ -14,6 +14,8 @@ std::stack<std::string> ShuntingYard::parsing()
 {
     std::istringstream input(line);
     bool prev_number = false;
+    std::stack<Node*> ast_stack;
+    std::string op;
 
     while (input >> cc)
     {
@@ -27,10 +29,15 @@ std::stack<std::string> ShuntingYard::parsing()
                 std::string num = output.top()+c;
                 output.pop();
                 output.push(num);
+
+                std::cout << "> Push: " << num << std::endl;
+                ast_stack.push(new Node(num));
             }
             else
             {
                 output.push(c);
+                std::cout << "> Push: " << c << std::endl;
+                ast_stack.push(new Node(c));
                 prev_number = true;
             }
         }
@@ -42,8 +49,18 @@ std::stack<std::string> ShuntingYard::parsing()
             // Verifying precedence
             while (!p.operators.empty() && p.check_precedence(p.operators.top(), c))
             {
-                output.push(p.operators.top());
+                op = p.operators.top();
+                output.push(op);
                 p.operators.pop();
+
+                Node *op2 = ast_stack.top();
+                ast_stack.pop();
+                Node *op1 = ast_stack.top();
+                ast_stack.pop();
+
+                std::cout << "> 1Push: " << op << " " << op1->value << " " << op2->value << std::endl;
+                ast_stack.push(new Node(op, op1, op2));
+
             }
             p.operators.push(c);
         }
@@ -61,8 +78,18 @@ std::stack<std::string> ShuntingYard::parsing()
             prev_number = false;
             while (!p.operators.empty() && !p.check_if_in(p.operators.top(), p.left_brackets))
             {
-                output.push(p.operators.top());
+                op = p.operators.top();
+                output.push(op);
                 p.operators.pop();
+
+                Node *op2 = ast_stack.top();
+                ast_stack.pop();
+                Node *op1 = ast_stack.top();
+                ast_stack.pop();
+
+
+                std::cout << "> 2Push: " << op << " " << op1->value << " " << op2->value << std::endl;
+                ast_stack.push(new Node(op, op1, op2));
             }
 
             // Verify missing left brackets
@@ -84,9 +111,35 @@ std::stack<std::string> ShuntingYard::parsing()
             throw std::invalid_argument("Mismatched parentheses: Extra bracket");
         }
 
-        output.push(p.operators.top());
+        op = p.operators.top();
+        output.push(op);
         p.operators.pop();
+
+
+        Node *op2 = ast_stack.top();
+        ast_stack.pop();
+        Node *op1 = ast_stack.top();
+        ast_stack.pop();
+
+        std::cout << "> 3Push: " << op << " " << op1->value << " " << op2->value << std::endl;
+        ast_stack.push(new Node(op, op1, op2));
+
     }
+
+    std::cout << "AST size: " << ast_stack.size() << std::endl;
+    Node *tmp = ast_stack.top();
+    while(tmp->left != nullptr)
+    {
+        std::cout << "AST value: " << tmp->value << std::endl;
+        std::cout << "AST l: "     << tmp->left->value << std::endl;
+        std::cout << "AST r: "     << tmp->right->value << std::endl;
+        //std::cout << "AST r: "     << tmp.right->right->value << std::endl;
+        //std::cout << "AST value: " << tmp.value << std::endl;
+        tmp = tmp->left;
+        getchar();
+    }
+
+
 
     // reversing stack
     std::stack<std::string> oo;
