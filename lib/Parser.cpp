@@ -12,7 +12,6 @@ bool Parser::check_number(std::string s)
         if (s.substr(0,1) == "m")
         {
             n = -std::stof(s.substr(1,s.length()));
-
         }
         else
         {

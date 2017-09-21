@@ -5,10 +5,7 @@ ShuntingYard::ShuntingYard(std::string line )
     this->line = line;
 }
 
-ShuntingYard::~ShuntingYard()
-{
-
-}
+ShuntingYard::~ShuntingYard(){}
 
 Node* ShuntingYard::get_ast()
 {
@@ -24,7 +21,6 @@ std::string ShuntingYard::clear_line(const std::string s)
 {
     // Small regex modification to the line
     std::string tmp, ff;
-
 
     // Remove double `-` for one `+`
     tmp = std::regex_replace(s, std::regex("\\-\\-"), "+");
@@ -54,7 +50,6 @@ std::string ShuntingYard::clear_line(const std::string s)
 
     // We will remove plus symbols at the beginning of the line
     ff = std::regex_replace(ff, std::regex("^\\+"), "");
-
 
     // Check for invalid tokens
     if(ff.find_first_not_of("0123456789(){}[]-+/*.") != std::string::npos)
@@ -97,12 +92,8 @@ void ShuntingYard::parsing()
                     }
                     num = num+c;
                 }
-                //else if (float_number)
-                //{
-                //    num = "0."+c;
-                //    float_number = false;
-                //}
 
+                // Remove and push a new value
                 if (!rpn.empty())
                 {
                     rpn.pop();

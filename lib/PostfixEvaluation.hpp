@@ -1,7 +1,6 @@
 #ifndef POSTFIXEVALUATION_HPP
 #define POSTFIXEVALUATION_HPP
 #include "ShuntingYard.hpp"
-#include <regex>
 
 class PostfixEvaluation
 {

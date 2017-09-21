@@ -1,7 +1,6 @@
 #ifndef SHUNTINGYARD_HPP
 #define SHUNTINGYARD_HPP
 #include "Parser.hpp"
-#include <regex>
 
 class ShuntingYard
 {

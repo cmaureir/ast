@@ -1,9 +1,6 @@
 #include "PostfixEvaluation.hpp"
 
-PostfixEvaluation::PostfixEvaluation()
-{
-}
-
+PostfixEvaluation::PostfixEvaluation(){}
 PostfixEvaluation::~PostfixEvaluation(){}
 
 bool PostfixEvaluation::is_number(const std::string &s)
@@ -11,6 +8,7 @@ bool PostfixEvaluation::is_number(const std::string &s)
     // Replace `m` for a `-`
     std::string tmp = std::regex_replace(s, std::regex("m"), "-");
 
+    // Check if string format is a number
     if (std::regex_match(tmp, std::regex("[-+]?\\d+\\.?\\d*")))
     {
         return true;
@@ -18,6 +16,7 @@ bool PostfixEvaluation::is_number(const std::string &s)
     return false;
 }
 
+// Evaluation of the RPN string expression
 float PostfixEvaluation::rpn_evaluation(std::stack<std::string> input)
 {
     float op1 = 0;
@@ -60,6 +59,7 @@ float PostfixEvaluation::rpn_evaluation(std::stack<std::string> input)
     return std::stof(result_stack.top());
 }
 
+// Recursive evaluation of the stack AST
 float PostfixEvaluation::ast_evaluation(Node* ast)
 {
     // Check null
@@ -76,7 +76,7 @@ float PostfixEvaluation::ast_evaluation(Node* ast)
         // Handling negative numbers
         if (s.substr(0,1) == "m")
         {
-            s = "-"+s.substr(1,s.length());
+            s = "-"+s.substr(1, s.length());
         }
         return std::stof(s);
     }
@@ -89,6 +89,5 @@ float PostfixEvaluation::ast_evaluation(Node* ast)
         else if (s == "-") { return op1 - op2; }
         else if (s == "*") { return op1 * op2; }
         else if (s == "/") { return op1 / op2; }
-
     }
 }
