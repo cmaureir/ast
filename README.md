@@ -22,11 +22,11 @@
 
 The code is written in two steps:
 1. [Shunting Yard Algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm):
-  * The parsing process will create a string in [Reverse Polish Notation (RPN)](https://en.wikipedia.org/wiki/Reverse_Polish_notation),
+   * The parsing process will create a string in [Reverse Polish Notation (RPN)](https://en.wikipedia.org/wiki/Reverse_Polish_notation),
     but also will populate an implementation of an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)
     using a stack.
 2. Postfix Evaluation:
-  * There are two methods to evaluate a RPN or an AST.
+   * There are two methods to evaluate a RPN or an AST.
 
 * Supported operations
    * Only `+`, `-`, `*` and `/` are supported, but it can be easily expanded.
