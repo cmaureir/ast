@@ -1,16 +1,18 @@
 #ifndef POSTFIXEVALUATION_HPP
 #define POSTFIXEVALUATION_HPP
 #include "ShuntingYard.hpp"
+#include <regex>
 
 class PostfixEvaluation
 {
     public:
-        PostfixEvaluation(std::stack<std::string> &q);
+        PostfixEvaluation();
         ~PostfixEvaluation();
 
-        std::stack<std::string> *input;
+        float rpn_evaluation(std::stack<std::string> input);
+        float ast_evaluation(Node* ast);
 
-        float calculate();
-
+    private:
+        bool is_number(const std::string &s);
 };
 #endif

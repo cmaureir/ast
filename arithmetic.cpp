@@ -4,18 +4,18 @@
 
 int main(int argc, char *argv[])
 {
-    // Input line
-    std::string line;
+    std::string line; // Input line
+    std::stack<std::string> output;  // Output for the ShuntingYard algorithm
 
-    // Output for the ShuntingYard algorithm
-    std::stack<std::string> output;
-    // Reading line and initialising ShuntingYard
-    getline(std::cin, line);
+    getline(std::cin, line);  // Reading line and initialising ShuntingYard
+
+
+    // Parsing process
     ShuntingYard sy(line);
 
     try
     {
-        output = sy.parsing();
+        sy.parsing();
     }
     catch (const std::invalid_argument &e)
     {
@@ -23,11 +23,25 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    // Print output from ShuntingYard
+    // Print output from ShuntingYard in RPN
     sy.print_result();
 
-    PostfixEvaluation pe(output);
-    std::cout << pe.calculate() <<std::endl;
+    // Evaluation process
+    PostfixEvaluation pe;
+    try
+    {
+        // RPN Evaluation
+        std::cout << pe.rpn_evaluation(sy.get_rpn()) <<std::endl;
+
+        // AST Evaluation
+        std::cout << pe.ast_evaluation(sy.get_ast()) << std::endl;
+    }
+    catch (const std::invalid_argument &e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 0;
+    }
 
     return 0;
 }
+

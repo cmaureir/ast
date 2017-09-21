@@ -6,9 +6,18 @@ Parser::~Parser() {}
 
 bool Parser::check_number(std::string s)
 {
+    float n;
     try
     {
-        float n = std::stof(s);
+        if (s.substr(0,1) == "m")
+        {
+            n = -std::stof(s.substr(1,s.length()));
+
+        }
+        else
+        {
+          n = std::stof(s);
+        }
     }
     catch(std::invalid_argument &ia)
     {
