@@ -21,9 +21,9 @@
 ## Structure
 
 The code is written in two steps:
-1. Shunting Yard Algorithm:
-  * The parsing process will create a string in Reverse Polish Notation (RPN),
-    but also will populate an implementation of an Abstract Syntax Tree (AST)
+1. [Shunting Yard Algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm):
+  * The parsing process will create a string in [Reverse Polish Notation (RPN)](https://en.wikipedia.org/wiki/Reverse_Polish_notation),
+    but also will populate an implementation of an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)
     using a stack.
 2. Postfix Evaluation:
   * There are two methods to evaluate a RPN or an AST.
@@ -32,11 +32,11 @@ The code is written in two steps:
    * Only `+`, `-`, `*` and `/` are supported, but it can be easily expanded.
 * Supported numbers:
    * All the number are interpreted as `float`.
-   * The formar could be `1.2`, `99`, `101.`, etc.
-   * The notation `.3` is not supported. The reason for this was that C++11 `regex`
+   * The format could be `1.2`, `99`, `101.`, etc.
+   * The notation `.3` is not supported. The reason for this was that C++11 [regex](http://en.cppreference.com/w/cpp/regex)
      does not support *Negative Lookbehind*.
      If `boost` was allowed, one can easily replace the notation with:
-     `/(?<!\d)[.](\d)")/0.\1`.
+     `/(?<!\d)[.](\d)")/0.\1/`.
 
 ## Compilation and execution
 
