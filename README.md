@@ -1,5 +1,7 @@
 # Arithmetic expression evaluator
 
+[![Build Status](https://travis-ci.org/cmaureir/ast.svg?branch=master)](https://travis-ci.org/cmaureir/ast)
+
 ## Requirements
 
 > Create a C++ program that can parse and evaluate arithmetic expressions.
